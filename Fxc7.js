@@ -99,7 +99,7 @@ ban = []
 
 //function
 const zalgo = require('./Fxc7/zalgo')
-const { fetchFxc7, fetchText } = require('./lib/fetcher')
+const { fetchJson, fetchText } = require('./lib/fetcher')
 const { recognize } = require('./lib/ocr')
 const { exif } = require('./lib/exif')
 const { color, bgcolor } = require('./lib/color')
@@ -1227,7 +1227,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (args.length < 1) return reply(`[❗] Kirim perintah *${prefix}kalkulator [ Angka ]*\nContoh : ${prefix}kalkulator 12*12\n*NOTE* :\n- Untuk Perkalian Menggunakan *\n- Untuk Pertambahan Menggunakan +\n- Untuk Pengurangan Mennggunakan -\n- Untuk Pembagian Menggunakan /`)
 				mtk = `${body.slice(12)}`
 				try {
-				anu = await fetchFxc7(`https://api.vhtear.com/calculator?value=${mtk}&apikey=${VthearApi}`, {method: 'get'})
+				anu = await fetchJson(`https://api.vhtear.com/calculator?value=${mtk}&apikey=${VthearApi}`, {method: 'get'})
 				frhan.sendMessage(from, `*${anu.result.data}*`, text, {quoted: mek})
 				} catch {
 				reply(mess.error.bug)
@@ -1281,7 +1281,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				case 'animecry':
 					cry = getRandom('.gif')
 					rano = getRandom('.webp')
-					anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/cry?apikey=${TobzApi}`, {method: 'get'})
+					anu = await fetchJson(`https://tobz-api.herokuapp.com/api/cry?apikey=${TobzApi}`, {method: 'get'})
 					if (!isUser) return reply(mess.only.userB)
 					
 					if (isLimit(sender)) return reply(limitend(pushname2))
@@ -1298,7 +1298,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					break 
 				case 'neonime':
 					frhan.updatePresence(from, Presence.composing) 
-					data = await fetchFxc7(`https://api.vhtear.com/neonime_search?query=${body.slice(9)}&apikey=${VthearApi}`, {method: 'get'})
+					data = await fetchJson(`https://api.vhtear.com/neonime_search?query=${body.slice(9)}&apikey=${VthearApi}`, {method: 'get'})
 					if (!isUser) return reply(mess.only.userB)
 					
 					if (isLimit(sender)) return reply(limitend(pushname2))
@@ -1315,7 +1315,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				case 'animehug':
 					ranp = getRandom('.gif')
 					rano = getRandom('.webp')
-					anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/hug?apikey=${TobzApi}`, {method: 'get'})
+					anu = await fetchJson(`https://tobz-api.herokuapp.com/api/hug?apikey=${TobzApi}`, {method: 'get'})
 					if (!isUser) return reply(mess.only.userB)
 					
 					if (isLimit(sender)) return reply(limitend(pushname2))
@@ -1449,7 +1449,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				try {
 				kode = ts.split("/")[0]
 				teks = ts.split("/")[1]
-				anu = await fetchFxc7(`https://api.arugaz.my.id/api/edu/translate?lang=${kode}&text=${teks}`)
+				anu = await fetchJson(`https://api.arugaz.my.id/api/edu/translate?lang=${kode}&text=${teks}`)
 				reply(mess.wait)
 				translate = `Text Asli: *${body.slice(11)}*\n\nHasil: *${anu.text}*`
 				frhan.sendMessage(from, translate, text, {quoted: mek})
@@ -1529,7 +1529,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (!isUser) return reply(mess.only.userB)
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
-				anu = await fetchFxc7(`https://xptnbotapinew.herokuapp.com/?truth&apikey=xptn`, {method: 'get'})
+				anu = await fetchJson(`https://xptnbotapinew.herokuapp.com/?truth&apikey=xptn`, {method: 'get'})
 				ttrth = `${anu.Dare}`
 				truteh = await getBuffer(`https://i.ibb.co/305yt26/bf84f20635dedd5dde31e7e5b6983ae9.jpg`)
 				frhan.sendMessage(from, truteh, image, { caption: '*Truth*\n\n'+ ttrth, quoted: mek })
@@ -1540,7 +1540,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (!isUser) return reply(mess.only.userB)
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
-				anu = await fetchFxc7(`https://xptnbotapinew.herokuapp.com/?dare&apikey=xptn`, {method: 'get'})
+				anu = await fetchJson(`https://xptnbotapinew.herokuapp.com/?dare&apikey=xptn`, {method: 'get'})
 				der = `${anu.Dare}`
 				tod = await getBuffer(`https://i.ibb.co/305yt26/bf84f20635dedd5dde31e7e5b6983ae9.jpg`)
 				frhan.sendMessage(from, tod, image, { quoted: mek, caption: '*Dare*\n\n'+ der })
@@ -1559,7 +1559,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				reply(mess.wait)
 				teks = body.slice(7)
 				try {
-				anu = await fetchFxc7(`http://scrap.terhambar.com/lirik?word=${teks}`, {method: 'get'})
+				anu = await fetchJson(`http://scrap.terhambar.com/lirik?word=${teks}`, {method: 'get'})
 				await costum(monospace('Lirik dari lagu '+teks+' adalah :\n\n'+anu.result.lirik), text, FarhanGans, FarhanGans2)
 				} catch { 
 				reply(mess.error.bug)
@@ -1588,7 +1588,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				reply(mess.wait)
 				try {
-				memein = await fetchFxc7(`https://api.zeks.xyz/api/memeindo?apikey=${ZeksApi}`, {method: 'get'})
+				memein = await fetchJson(`https://api.zeks.xyz/api/memeindo?apikey=${ZeksApi}`, {method: 'get'})
 				buffer = await getBuffer(memein.result)
 				frhan.sendMessage(from, buffer, image, {quoted: mek, caption: '.......'})
 				} catch {
@@ -1603,7 +1603,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				reply(mess.wait)
 				try {
-				meme = await fetchFxc7(`https://some-random-api.ml/meme`)
+				meme = await fetchJson(`https://some-random-api.ml/meme`)
 				buffer = await getBuffer(meme.result)
 				frhan.sendMessage(from, buffer, image, {quoted: mek, caption: `${meme.caption}`})
 				} catch {
@@ -1634,7 +1634,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				
 				if (isLimit(sender)) return reply(limits.limitend(pushname2))
 				if (!isNsfw) return reply(' *FALSE* ')
-				res = await fetchFxc7(`https://api.vhtear.com/randomloli&apikey=${VthearApi}`, {method: 'get'})
+				res = await fetchJson(`https://api.vhtear.com/randomloli&apikey=${VthearApi}`, {method: 'get'})
 				buffer = await getBuffer(res.result.result)
 				frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 				} catch (e) {
@@ -1650,7 +1650,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				
 				if (isLimit(sender)) return reply(limits.limitend(pushname2))
 				if (!isNsfw) return reply(' *FALSE* ')
-				res = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random2/solo?apikey=${LolApi}`, {method: 'get'})
+				res = await fetchJson(`http://lolhuman.herokuapp.com/api/random2/solo?apikey=${LolApi}`, {method: 'get'})
 				buffer = await getBuffer(res.result)
 				frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 				} catch (e) {
@@ -1666,7 +1666,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				
 				if (isLimit(sender)) return reply(limits.limitend(pushname2))
 				if (!isNsfw) return reply(' *FALSE* ')
-				res = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random2/eron?apikey=${LolApi}`, {method: 'get'})
+				res = await fetchJson(`http://lolhuman.herokuapp.com/api/random2/eron?apikey=${LolApi}`, {method: 'get'})
 				buffer = await getBuffer(res.result)
 				frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 				} catch (e) {
@@ -1682,7 +1682,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				
 				if (isLimit(sender)) return reply(limits.limitend(pushname2))
 				if (!isNsfw) return reply(' *FALSE* ')
-				res = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random2/lewd?apikey=${LolApi}`, {method: 'get'})
+				res = await fetchJson(`http://lolhuman.herokuapp.com/api/random2/lewd?apikey=${LolApi}`, {method: 'get'})
 				buffer = await getBuffer(res.result)
 				frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 				} catch (e) {
@@ -1698,7 +1698,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				
 				if (isLimit(sender)) return reply(limits.limitend(pushname2))
 				if (!isNsfw) return reply(' *FALSE* ')
-				res = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random2/yuri?apikey=${LolApi}`, {method: 'get'})
+				res = await fetchJson(`http://lolhuman.herokuapp.com/api/random2/yuri?apikey=${LolApi}`, {method: 'get'})
 				buffer = await getBuffer(res.result)
 				frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 				} catch (e) {
@@ -1714,7 +1714,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				
 				if (isLimit(sender)) return reply(limits.limitend(pushname2))
 				if (!isNsfw) return reply(' *FALSE* ')
-				res = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random/nsfw/ecchi?apikey=${LolApi}`, {method: 'get'})
+				res = await fetchJson(`http://lolhuman.herokuapp.com/api/random/nsfw/ecchi?apikey=${LolApi}`, {method: 'get'})
 				buffer = await getBuffer(res.result)
 				frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 				} catch (e) {
@@ -1730,7 +1730,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				    
 				    if (isLimit(sender)) return reply(limits.limitend(pushname2))
 						if (!isNsfw) return reply(' *FALSE* ')
-						res = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random/nsfw/hentaiparadise?apikey=${LolApi}`, {method: 'get'})
+						res = await fetchJson(`http://lolhuman.herokuapp.com/api/random/nsfw/hentaiparadise?apikey=${LolApi}`, {method: 'get'})
 						buffer = await getBuffer(res.result)
 						frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 					} catch (e) {
@@ -1746,7 +1746,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				    
 				    if (isLimit(sender)) return reply(limits.limitend(pushname2))
 						if (!isNsfw) return reply(' *FALSE* ')
-						res = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random/nsfw/biganimetiddies?apikey=${LolApi}`, {method: 'get'})
+						res = await fetchJson(`http://lolhuman.herokuapp.com/api/random/nsfw/biganimetiddies?apikey=${LolApi}`, {method: 'get'})
 						buffer = await getBuffer(res.result)
 						frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 					} catch (e) {
@@ -1762,7 +1762,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				    
 				    if (isLimit(sender)) return reply(limits.limitend(pushname2))
 						if (!isNsfw) return reply(' *FALSE* ')
-						res = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random2/classic?apikey=${LolApi}`, {method: 'get'})
+						res = await fetchJson(`http://lolhuman.herokuapp.com/api/random2/classic?apikey=${LolApi}`, {method: 'get'})
 						buffer = await getBuffer(res.result.result)
 						frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 					} catch (e) {
@@ -1778,7 +1778,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				    
 				    if (isLimit(sender)) return reply(limits.limitend(pushname2))
 						if (!isNsfw) return reply(' *FALSE* ')
-						res = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random2/cum_jpg?apikey=${LolApi}`, {method: 'get'})
+						res = await fetchJson(`http://lolhuman.herokuapp.com/api/random2/cum_jpg?apikey=${LolApi}`, {method: 'get'})
 						buffer = await getBuffer(res.result)
 						frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 					} catch (e) {
@@ -1794,7 +1794,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				    
 				    if (isLimit(sender)) return reply(limits.limitend(pushname2))
 						if (!isNsfw) return reply(' *FALSE* ')
-						res = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random2/pussy?apikey=${LolApi}`, {method: 'get'})
+						res = await fetchJson(`http://lolhuman.herokuapp.com/api/random2/pussy?apikey=${LolApi}`, {method: 'get'})
 						buffer = await getBuffer(res.result)
 						frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 					} catch (e) {
@@ -1810,7 +1810,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				    
 				    if (isLimit(sender)) return reply(limitend(pushname2))
 						if (!isNsfw) return reply(' *FALSE* ')
-						res = await fetchFxc7(`https://tobz-api.herokuapp.com/api/nsfwblowjob?apikey=${TobzApi}`, {method: 'get'})
+						res = await fetchJson(`https://tobz-api.herokuapp.com/api/nsfwblowjob?apikey=${TobzApi}`, {method: 'get'})
 						buffer = await getBuffer(res.result)
 						frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
 					} catch (e) {
@@ -1826,7 +1826,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				    
 				    if (isLimit(sender)) return reply(limitend(pushname2))
 						if (!isNsfw) return reply(' *FALSE* ')
-						res = await fetchFxc7(`https://tobz-api.herokuapp.com/api/nsfwneko?apikey=${TobzApi}`, {method: 'get'})
+						res = await fetchJson(`https://tobz-api.herokuapp.com/api/nsfwneko?apikey=${TobzApi}`, {method: 'get'})
 						buffer = await getBuffer(res.result)
 						frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'ni anjim'})
 					} catch (e) {
@@ -1842,7 +1842,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				    
 				    if (isLimit(sender)) return reply(limitend(pushname2))
 						if (!isNsfw) return reply(' *FALSE* ')
-						res = await fetchFxc7(`https://tobz-api.herokuapp.com/api/nsfwtrap?apikey=${TobzApi}`, {method: 'get'})
+						res = await fetchJson(`https://tobz-api.herokuapp.com/api/nsfwtrap?apikey=${TobzApi}`, {method: 'get'})
 						buffer = await getBuffer(res.result)
 						frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'ni anjim'})
 					} catch (e) {
@@ -1858,7 +1858,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				    
 				    if (isLimit(sender)) return reply(limitend(pushname2))
 						if (!isNsfw) return reply(' *FALSE* ')
-						res = await fetchFxc7(`https://tobz-api.herokuapp.com/api/hentai?apikey=${TobzApi}`, {method: 'get'})
+						res = await fetchJson(`https://tobz-api.herokuapp.com/api/hentai?apikey=${TobzApi}`, {method: 'get'})
 						buffer = await getBuffer(res.result)
 						frhan.sendMessage(from, buffer, image, {quoted: mek, caption: 'ni anjim'})
 					} catch (e) {
@@ -1875,7 +1875,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				try {
 					if (args.length < 1) return reply('Mau Nyari Chord Lagu Apa??')
 					tels = body.slice(7)
-					anu = await fetchFxc7(`https://alfians-api.herokuapp.com/api/chord?q=${tels}`, {method: 'get'})
+					anu = await fetchJson(`https://alfians-api.herokuapp.com/api/chord?q=${tels}`, {method: 'get'})
 					frhan.sendMessage(from, `${anu.result}`, text, {quoted: mek})
 					} catch {
 					reply(mess.error.bug)
@@ -1887,7 +1887,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isUser) return reply(mess.only.userB)
 					if (isLimit(sender)) return reply(limitend(pushname2))
 					try {
-					anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/infogempa?apikey=${TobzApi}`, {method: 'get'})
+					anu = await fetchJson(`https://tobz-api.herokuapp.com/api/infogempa?apikey=${TobzApi}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					buff = await getBuffer(anu.map)
 					reply(mess.wait)
@@ -1904,7 +1904,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					
 					if (isLimit(sender)) return reply(limitend(pushname2))
 					try {
-					anu = await fetchFxc7(`https://api.vhtear.com/randomcat?apikey=${VthearApi}`, {method: 'get'})
+					anu = await fetchJson(`https://api.vhtear.com/randomcat?apikey=${VthearApi}`, {method: 'get'})
 					reply(mess.wait)
 					buff = await getBuffer(anu.result.url)
 					frhan.sendMessage(from, buff, image, { quoted: mek , caption: 'meong🐈'})
@@ -1920,7 +1920,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 				try {
-					anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/randomanime?apikey=${TobzApi}`, {method: 'get'})
+					anu = await fetchJson(`https://tobz-api.herokuapp.com/api/randomanime?apikey=${TobzApi}`, {method: 'get'})
 					reply(mess.wait)
 					pok = await getBuffer(anu.result)
 					frhan.sendMessage(from, pok, image, { quoted: mek , caption: 'nihhh'})
@@ -1936,7 +1936,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (isLimit(sender)) return reply(limitend(pushname2))
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					try {
-					anu = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random/megumin?apikey=${LolApi}`, {method: 'get'})
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/random/megumin?apikey=${LolApi}`, {method: 'get'})
 					reply(mess.wait)
 					pok = await getBuffer(anu.result)
 					frhan.sendMessage(from, pok, image, { quoted: mek , caption: '*_MEGUMIN_*'})
@@ -1953,7 +1953,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					ranp = getRandom('.gif')
 					rano = getRandom('.webp')
-					anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/kiss?apikey=${TobzApi}`, {method: 'get'})
+					anu = await fetchJson(`https://tobz-api.herokuapp.com/api/kiss?apikey=${TobzApi}`, {method: 'get'})
 					exec(`wget ${anu.result} -O ${ranp} && ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=15 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${rano}`, (err) => {
 						fs.unlinkSync(ranp)
 						buffer = fs.readFileSync(rano)
@@ -1970,7 +1970,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					try {
 					reply(mess.wait)
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=Naruto`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=Naruto`, {method: 'get'})
 					naru = JSON.parse(JSON.stringify(anu));
 					to =  naru[Math.floor(Math.random() * naru.length)];
 					nye = await getBuffer(to)
@@ -1988,7 +1988,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=Minato`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=Minato`, {method: 'get'})
 					min = JSON.parse(JSON.stringify(anu));
 					ato =  min[Math.floor(Math.random() * min.length)];
 					nye = await getBuffer(ato)
@@ -2006,7 +2006,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=Boruto`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=Boruto`, {method: 'get'})
 					bor = JSON.parse(JSON.stringify(anu));
 					uto =  bor[Math.floor(Math.random() * bor.length)];
 					nye = await getBuffer(uto)
@@ -2024,7 +2024,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=Hinata`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=Hinata`, {method: 'get'})
 					hina = JSON.parse(JSON.stringify(anu));
 					ta =  hina[Math.floor(Math.random() * hina.length)];
 					nye = await getBuffer(ta)
@@ -2042,7 +2042,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=sasuke`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=sasuke`, {method: 'get'})
 					sasu = JSON.parse(JSON.stringify(anu));
 					ke =  sasu[Math.floor(Math.random() * sasu.length)];
 					nye = await getBuffer(ke)
@@ -2060,7 +2060,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=sakura`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=sakura`, {method: 'get'})
 					sak = JSON.parse(JSON.stringify(anu));
 					kura =  sak[Math.floor(Math.random() * sak.length)];
 					nye = await getBuffer(kura)
@@ -2079,7 +2079,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.vhtear.com/pinterest?query=kaneki&apikey=${VthearApi}`, {method: 'get'})
+					anu = await fetchJson(`https://api.vhtear.com/pinterest?query=kaneki&apikey=${VthearApi}`, {method: 'get'})
 					var ka = JSON.parse(JSON.stringify(anu.result));
 					var ne =  ka[Math.floor(Math.random() * ka.length)];
 					ki = await getBuffer(ne)
@@ -2097,7 +2097,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=anime+touka`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=anime+touka`, {method: 'get'})
 					tou = JSON.parse(JSON.stringify(anu));
 					ka =  tou[Math.floor(Math.random() * tou.length)];
 					nye = await getBuffer(ka)
@@ -2115,7 +2115,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=anime+rize`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=anime+rize`, {method: 'get'})
 					ri = JSON.parse(JSON.stringify(anu));
 					ze =  ri[Math.floor(Math.random() * ri.length)];
 					nye = await getBuffer(ze)
@@ -2133,7 +2133,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=anime+akira`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=anime+akira`, {method: 'get'})
 					ak = JSON.parse(JSON.stringify(anu));
 					ara =  ak[Math.floor(Math.random() * ak.length)];
 					nye = await getBuffer(ara)
@@ -2151,7 +2151,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=anime+itori`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=anime+itori`, {method: 'get'})
 					it = JSON.parse(JSON.stringify(anu));
 					ori =  it[Math.floor(Math.random() * it.length)];
 					nye = await getBuffer(ori)
@@ -2169,7 +2169,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=anime+karumi`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=anime+karumi`, {method: 'get'})
 					kur = JSON.parse(JSON.stringify(anu));
 					imi =  kur[Math.floor(Math.random() * kur.length)];
 					nye = await getBuffer(imi)
@@ -2187,7 +2187,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isAnime) return reply(' *Harus Mengaktifkan Mode Anime* ')
 					reply(mess.wait)
 					try {
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=anime+miku`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=anime+miku`, {method: 'get'})
 					mi = JSON.parse(JSON.stringify(anu));
 					ku =  mi[Math.floor(Math.random() * mi.length)];
 					nye = await getBuffer(ku)
@@ -2204,7 +2204,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (!isUser) return reply(mess.only.userB)
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
-					anu = await fetchFxc7(`https://api.fdci.se/rep.php?gambar=anjing`, {method: 'get'})
+					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=anjing`, {method: 'get'})
 					reply(mess.wait)
 					try {
 					n = JSON.parse(JSON.stringify(anu));
@@ -2221,7 +2221,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isUser) return reply(mess.only.userB)
 					if (isLimit(sender)) return reply(limitend(pushname2))
 					try {
-					anu = await fetchFxc7(`https://api.vhtear.com/resepmasakan?query=${body.slice(14)}&apikey=${VthearApi}`, {method: 'get'})
+					anu = await fetchJson(`https://api.vhtear.com/resepmasakan?query=${body.slice(14)}&apikey=${VthearApi}`, {method: 'get'})
 					hasilresep = `*${anu.result.title}*\n${anu.result.desc}\n\n*Untuk Bahan²nya*\n${anu.result.bahan}\n\n*Dan Untuk Tutorialnya*\n${anu.result.cara}`
 					reply(mess.wait)
 					buff = await getBuffer(anu.result.image)
@@ -2237,7 +2237,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					
 					if (isLimit(sender)) return reply(limitend(pushname2))
 					try {
-					anu = await fetchFxc7(`https://api.vhtear.com/cerita_sex&apikey=${VthearApi}`, {method: 'get'})
+					anu = await fetchJson(`https://api.vhtear.com/cerita_sex&apikey=${VthearApi}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					sex = await getBuffer(anu.result.image)
 					reply (mess.wait)
@@ -2253,7 +2253,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (!isUser) return reply(mess.only.userB)
 					if (isLimit(sender)) return reply(limitend(pushname2))
 					try {
-					anu = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random/exo?apikey=${LolApi}`, {method: 'get'})
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/random/exo?apikey=${LolApi}`, {method: 'get'})
 					buff = await getBuffer(anu.result)
 					frhan.sendMessage(from, buff, image, {quoted: mek})
 					} catch {
@@ -2279,7 +2279,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (isLimit(sender)) return reply(limitend(pushname2)) 
 					try {
 					ps = `${body.slice(11)}`
-					anu = await fetchFxc7(`https://api.vhtear.com/playstore?query=${ps}&apikey=${VthearApi}`, {method: 'get'})
+					anu = await fetchJson(`https://api.vhtear.com/playstore?query=${ps}&apikey=${VthearApi}`, {method: 'get'})
 					store = '======================\n'
 					for (let ply of anu.result){
 					store += `• *Nama Apk:* ${ply.title}\n• *ID:* ${ply.app_id}\n• *Developer:* ${ply.developer}\n• *Deskripsi:* ${ply.description}\n• *Link Apk:* https://play.google.com/${ply.url}\n=====================\n`
@@ -2299,7 +2299,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					reply(mess.wait)
 					if (args.length < 1) return reply('teksnya mana gan?')
 					teks = body.slice(9)
-					anu = await fetchFxc7(`https://api.arugaz.my.id/api/media/pornhub/search?query=${teks}`, {method: 'get'})
+					anu = await fetchJson(`https://api.arugaz.my.id/api/media/pornhub/search?query=${teks}`, {method: 'get'})
 					teks = `===============\n`
 					for (let bokep of anu.result) {
 					teks += `Title: ${bokep.title}\nAktor: ${bokep.author}\nViewers: *${bokep.views}*\nDurasi: ${bokep.duration}\nLink: ${bokep.link}\n===============\n`
@@ -2319,7 +2319,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					reply(mess.wait)
 					if (args.length < 1) return reply('teksnya mana gan?')
 					teks = body.slice(9)
-					anu = await fetchFxc7(`https://api.vhtear.com/nekosearch?query=${teks}&apikey=${VthearApi}`, {method: 'get'})
+					anu = await fetchJson(`https://api.vhtear.com/nekosearch?query=${teks}&apikey=${VthearApi}`, {method: 'get'})
 					teks = `===============\n`
 					for (let neko of anu.result) {
 					teks += `Title: ${neko.title}\nDeskripsi: ${neko.detail}\n===============\n`
@@ -2338,7 +2338,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					try {
 					reply(mess.wait)
 					if (args.length < 1) return reply('teksnya mana gan?')
-					anu = await fetchFxc7(`https://api.arugaz.my.id/api/media/xvideo/search?query=${body.slice(9)}`, {method: 'get'})
+					anu = await fetchJson(`https://api.arugaz.my.id/api/media/xvideo/search?query=${body.slice(9)}`, {method: 'get'})
 					teks = `===============\n`
 					for (let b of anu.result) {
 					teks += `• Title: ${b.title}\n• Info: ${b.info}\n• Link: ${b.link}\n===============\n`
@@ -2357,7 +2357,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					try { 
 					reply(mess.wait)
 					if (args.length < 1) return reply('mau nyari apa?')
-					anu = await fetchFxc7(`https://api.arugaz.my.id/api/media/xnxx/search?query=${body.slice(6)}`, {method: 'get'})
+					anu = await fetchJson(`https://api.arugaz.my.id/api/media/xnxx/search?query=${body.slice(6)}`, {method: 'get'})
 					teks = `===============\n`
 					for (let xnxx of anu.result) {
 					teks += `• Title: ${xnxx.title}\n• Info: ${xnxx.info}\n• Link: ${xnxx.link}\n===============\n`
@@ -2380,7 +2380,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (args.length < 1) return reply('Urlnya mana gan?')
 					if (!isUrl(args[0]) && !args[0].includes('www.facebook.com')) return reply(mess.error.Iv)
 					reply(mess.wait)
-					anu = await fetchFxc7(`https://mhankbarbar.tech/api/epbe?url=${args[0]}&apiKey=${BarBarApi}`, {method: 'get'})
+					anu = await fetchJson(`https://mhankbarbar.tech/api/epbe?url=${args[0]}&apiKey=${BarBarApi}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					frhan.sendMessage(from, '[ WAIT ] Sedang Diproses\n\nLinknya Only Google Gan Biar Bisa Didownload', text, {quoted: mek})
 					efbe = `Title: *${anu.title}*\nSize: *${anu.filesize}\nDipublikasikan Pada: *${anu.published}*`
@@ -2401,7 +2401,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				try {
 				instor = `${body.slice(12)}`
-				anu = await fetchFxc7(`https://api.vhtear.com/igstory?query=${instor}&apikey=${VthearApi}`, {method: 'get'})
+				anu = await fetchJson(`https://api.vhtear.com/igstory?query=${instor}&apikey=${VthearApi}`, {method: 'get'})
 				insta = '=========================\n'
 				for (let i of anu.result.story.itemlist) {
 				insta += `• *User:* ${anu.result.owner_username}\n• *Type:* ${i.type}\n• *Link:* ${i.urlDownload}\n=========================\n`
@@ -2427,7 +2427,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (isLimit(sender)) return reply(limitend(pushname2))
 					if (args.length < 1) return reply('Yang mau di cari apaan? titit?')
 					try {
-					anu = await fetchFxc7(`https://api.zeks.xyz/api/yts?q=${body.slice(10)}&apikey=${ZeksApi}`, {method: 'get'})
+					anu = await fetchJson(`https://api.zeks.xyz/api/yts?q=${body.slice(10)}&apikey=${ZeksApi}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					teks = '=======================\n'
 					for (let i of anu.result) {
@@ -2463,7 +2463,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (args.length < 1) return reply('Mau Cari Film Apa?')
 				try {
 				reply(mess.wait)
-				anu = await fetchFxc7(`http://www.omdbapi.com/?s=${body.slice(6)}&plot=full&apikey=56b1b6f0&r=json`, {method: 'get'})
+				anu = await fetchJson(`http://www.omdbapi.com/?s=${body.slice(6)}&plot=full&apikey=56b1b6f0&r=json`, {method: 'get'})
 				hasil = '=========================\n'
 				for(let film of anu.Search) {
 				hasil += `• *Title:* ${film.Title}\n• *Rilis Tahun:* ${film.Year}\n• *Type:* ${film.Type}\n• *Link:* https://m.imdb.com/title/${film.imdbID}\n=========================\n`
@@ -2576,7 +2576,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					ranp = getRandom('.png')
 					rano = getRandom('.webp')
 					teks = body.slice(4).trim()
-					anu = await fetchFxc7(`https://mhankbarbar.tech/api/text2image?text=${teks}&apiKey=${BarBarApi}`, {method: 'get'})
+					anu = await fetchJson(`https://mhankbarbar.tech/api/text2image?text=${teks}&apiKey=${BarBarApi}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					exec(`wget ${anu.result} -O ${ranp} && ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${rano}`, (err) => {
 						fs.unlinkSync(ranp)
@@ -2805,7 +2805,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					const pref = `Usage: \n${prefix}quotemaker teks/watermark/theme\n\nEx :\n${prefix}quotemaker ini contoh/bicit/random`
 					if (args.length < 1) return reply(pref)
 					reply(mess.wait)
-					anu = await fetchFxc7(`https://terhambar.com/aw/qts/?kata=${quote}&author=${wm}&tipe=${bg}`, {method: 'get'})
+					anu = await fetchJson(`https://terhambar.com/aw/qts/?kata=${quote}&author=${wm}&tipe=${bg}`, {method: 'get'})
 					buffer = await getBuffer(anu.result)
 					costum(buffer, image, FarhanGans, ` ~ Quotes Maker`)
 					} catch {
@@ -2907,7 +2907,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			    jarak = `${body.slice(7)}`
 			    ja = jarak.split("/")[0];
 			    rak = jarak.split("/")[1];
-			    anu = await fetchFxc7(`https://api.vhtear.com/distance?from=${ja}&to=${rak}&apikey=${VthearApi}`, {method: 'get'})
+			    anu = await fetchJson(`https://api.vhtear.com/distance?from=${ja}&to=${rak}&apikey=${VthearApi}`, {method: 'get'})
 			    frhan.sendMessage(from, `${anu.result.data}`, text, {quoted: mek})
 			    } catch {
 					reply(mess.error.bug)
@@ -2920,7 +2920,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			    if (!isUser) return reply(mess.only.userB)
 			    if (isLimit(sender)) return reply(limitend(pushname2))
 			    reply(mess.wait)
-                    anu = await fetchFxc7(`https://api.vhtear.com/infoalamat?query=${body.slice(12)}&apikey=${VthearApi}`, {method: 'get'})
+                    anu = await fetchJson(`https://api.vhtear.com/infoalamat?query=${body.slice(12)}&apikey=${VthearApi}`, {method: 'get'})
 			        frhan.sendMessage(from, `${anu.result.data}`, text, {quoted: mek})
 			        } catch {
 					reply(mess.error.bug)
@@ -2934,7 +2934,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			    
 			    if (isLimit(sender)) return reply(limitend(pushname2))
 			    reply(mess.wait)
-                    anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/tinyurl?url=${body.slice(9)}&apikey=${TobzApi}`)
+                    anu = await fetchJson(`https://tobz-api.herokuapp.com/api/tinyurl?url=${body.slice(9)}&apikey=${TobzApi}`)
 			        tinyurl = `${anu.result}`
 			        reply(tinyurl)
 			        } catch {
@@ -2947,7 +2947,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
                     if (isBanned) return reply(mess.only.benned)    
    					if (!isUser) return reply(mess.only.userB)
    					if (isLimit(sender)) return reply(limitend(pushname2))
-                    anu = await fetchFxc7(`https://api.vhtear.com/igprofile?query=${args[0]}&apikey=${VthearApi}`, {method: 'get'})
+                    anu = await fetchJson(`https://api.vhtear.com/igprofile?query=${args[0]}&apikey=${VthearApi}`, {method: 'get'})
                      buffer = await getBuffer(anu.result.picture)
                      reply(mess.wait)
                      hasil = `╭─「 *INSTAGRAM STALKER* 」\n│\n│• Link: https://www.instagram.com/${anu.result.username}\n│• Fullname : ${anu.result.full_name}\n│ • Post: ${anu.result.post_count}\n│• Followers : ${anu.result.follower}\n│• Following : ${anu.result.follow}\n│• Jumlah Postingan: ${anu.result.post_count}\n│• Bio : ${anu.result.biography}\n╰─────────────────────`
@@ -2964,7 +2964,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			    if (!isUser) return reply(mess.only.userB)
 			    if (args.length < 1) return reply('mimpi apa??')
 			    reply(mess.wait)
-			        anu = await fetchFxc7(`https://api.zeks.xyz/api/artimimpi?apikey=${ZeksApi}&q=${body.slice(7)}`, {method: 'get'})
+			        anu = await fetchJson(`https://api.zeks.xyz/api/artimimpi?apikey=${ZeksApi}&q=${body.slice(7)}`, {method: 'get'})
 			        mimpi = `${anu.result.text}`
 			        frhan.sendMessage(from, mimpi, text, {quoted: mek})
 			        } catch {
@@ -2991,7 +2991,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				 if (isLimit(sender)) return reply(limitend(pushname2))
 				if (!isUser) return reply(mess.only.userB)
 				
-					anu = await fetchFxc7(`http://indonesian-java-security.ezyro.com/Fakta.php?apikey=${Fxc7Api}`, {method: 'get'})
+					anu = await fetchJson(`http://indonesian-java-security.ezyro.com/Fakta.php?apikey=${Fxc7Api}`, {method: 'get'})
 					fakta = `Faktanya: *${anu.result}*`
 					frhan.sendMessage(from, fakta, text, {quoted: mek})
 					} catch {
@@ -3004,7 +3004,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
 				if (isLimit(sender)) return reply(limitend(pushname2))
-					anu = await fetchFxc7(`https://api.arugaz.my.id/api/random/text/katabijak`, {method: 'get'})
+					anu = await fetchJson(`https://api.arugaz.my.id/api/random/text/katabijak`, {method: 'get'})
 					katabijak = `Kata Bijak: *${anu.result}*`
 					frhan.sendMessage(from, katabijak, text, {quoted: mek})
 					} catch {
@@ -3020,7 +3020,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			    
 			    if (isLimit(sender)) return reply(limitend(pushname2))
 			    reply(mess.wait)
-                    anu = await fetchFxc7(`https://api.vhtear.com/tiktokprofile?query=${body.slice(14)}&apikey=${VthearApi}`, {method: 'get'})
+                    anu = await fetchJson(`https://api.vhtear.com/tiktokprofile?query=${body.slice(14)}&apikey=${VthearApi}`, {method: 'get'})
 			        tiktok = await getBuffer(anu.result.picture)
               frhan.sendMessage(from, tiktok, image, {quoted: mek})
 			        } catch {
@@ -3060,7 +3060,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				pa = `${body.slice(10)}`
 				sa = pa.split("/")[0];
 				ngan = pa.split("/")[1];
-				anu = await fetchFxc7(`https://api.zeks.xyz/api/primbonjodoh?apikey=${ZeksApi}&nama1=${sa}&nama2=${ngan}`, {method: 'get'})
+				anu = await fetchJson(`https://api.zeks.xyz/api/primbonjodoh?apikey=${ZeksApi}&nama1=${sa}&nama2=${ngan}`, {method: 'get'})
 				hasil = `Nama Anda: ${anu.result.nama1}\nNama Pasangan: ${anu.result.nama2}\n\nHal Positif: ${anu.result.positif}\n\nHal Negatif: ${anu.result.negatif}`
 				buff = await getBuffer(anu.result.thumb)
 				frhan.sendMessage(from, buff, image, {quoted: mek, caption: hasil})
@@ -3101,7 +3101,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			    
 			    if (isLimit(sender)) return reply(limitend(pushname2))
 			    reply(mess.wait)
-                anu = await fetchFxc7(`https://mnazria.herokuapp.com/api/maps?search=${body.slice(5)}`, {method: 'get'})
+                anu = await fetchJson(`https://mnazria.herokuapp.com/api/maps?search=${body.slice(5)}`, {method: 'get'})
                 buffer = await getBuffer(anu.gambar)
                 frhan.sendMessage(from, buffer, image, {quoted: mek, caption: `${body.slice(5)}`})
 				} catch {
@@ -3121,7 +3121,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (args.length < 2) return reply('Urlnya mana gan?')
 					if (!isUrl(args[1])) return reply(mess.error.Iv)
 					reply(mess.wait)
-					anu = await fetchFxc7(`https://mhankbarbar.tech/api/url2image?tipe=${args[0]}&url=${args[1]}&apiKey=${BarBarApi}`, {method: 'get'})
+					anu = await fetchJson(`https://mhankbarbar.tech/api/url2image?tipe=${args[0]}&url=${args[1]}&apiKey=${BarBarApi}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					url2img = await getBuffer(anu.result)
 					frhan.sendMessage(from, url2img, image, {quoted: mek})
@@ -3167,7 +3167,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			    if (isLimit(sender)) return reply(limitend(pushname2))
 			    reply(mess.wait)
 					if (args.length < 1) return reply('Apa yang mau dicari gan?')
-					anu = await fetchFxc7(`https://mnazria.herokuapp.com/api/kbbi?search=${body.slice(6)}`, {method: 'get'})
+					anu = await fetchJson(`https://mnazria.herokuapp.com/api/kbbi?search=${body.slice(6)}`, {method: 'get'})
 					reply('Menurut Kbbi:\n\n'+anu.result)
 					} catch {
 					reply(mess.error.bug)
@@ -3195,7 +3195,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (!isUser) return reply(mess.only.userB)
 				if (isLimit(sender)) return reply(limitend(pushname2))
 					if (args.length < 1) return reply('Apa yang mau dicari gan?')
-					anu = await fetchFxc7(`https://api.zeks.xyz/api/artinama?apikey=${ZeksApi}&nama=${body.slice(10)}`, {method: 'get'})
+					anu = await fetchJson(`https://api.zeks.xyz/api/artinama?apikey=${ZeksApi}&nama=${body.slice(10)}`, {method: 'get'})
 					frhan.sendMessage(from, anu.result, text, {quoted: mek})
 					} catch {
 					reply(mess.error.bug)
@@ -3717,7 +3717,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			 if (!isUser) return reply(mess.only.userB)
 			 frhan.updatePresence(from, Presence.composing) 
 			 if (isLimit(sender)) return reply(limitend(pushname2))
-					anu = await fetchFxc7(`https://api.banghasan.com/quran/format/json/acak`, {method: 'get'})
+					anu = await fetchJson(`https://api.banghasan.com/quran/format/json/acak`, {method: 'get'})
 					quran = `${anu.acak.ar.teks}\n\n${anu.acak.id.teks}\nQ.S ${anu.surat.nama} ayat ${anu.acak.id.ayat}`
 					frhan.sendMessage(from, quran, text, {quoted: mek})
 					} catch {
@@ -3734,7 +3734,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (args.length < 1) return reply('Kirim perintah *!cuaca [tempat]*\nContoh : *!cuaca Banyuwangi')
 					reply(mess.wait)
 					tempat = `${body.slice(11)}`
-					weather = await fetchFxc7('https://videfikri.com/api/cuaca/?daerah='+ tempat, {method: 'get'})
+					weather = await fetchJson('https://videfikri.com/api/cuaca/?daerah='+ tempat, {method: 'get'})
 					if (weather.error) {
 					 reply(from, weather.error, text)
 					 } else {
@@ -3754,7 +3754,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (isLimit(sender)) return reply(limitend(pushname2))
 					if (args.length < 1) return reply('Mau Nyari Foto Apa???')
 					pinte = body.slice(11)
-					anu = await fetchFxc7(`https://api.vhtear.com/pinterest?query=${pinte}&apikey=${VthearApi}`, {method: 'get'})
+					anu = await fetchJson(`https://api.vhtear.com/pinterest?query=${pinte}&apikey=${VthearApi}`, {method: 'get'})
 					reply(mess.wait)
 					var pin = JSON.parse(JSON.stringify(anu.result));
 					var trest =  pin[Math.floor(Math.random() * pin.length)];
@@ -3809,7 +3809,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (isLimit(sender)) return reply(limitend(pushname2))
 					if (args.length < 1) return reply('Masukan nama daerah!!')
 					sholat = `${body.slice(14)}`
-					anu = await fetchFxc7(`http://lolhuman.herokuapp.com/api/sholat/${sholat}?apikey=${LolApi}`, {method: 'get'})
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/sholat/${sholat}?apikey=${LolApi}`, {method: 'get'})
 					reply(mess.wait)
 					hasil = `• *Wilayah:* ${anu.result.wilayah}\n• *Tanggal:* ${anu.result.tanggal}\n• *imsak:* ${anu.result.imsak}\n• *subuh:* ${anu.result.subuh}\n• *terbit:* ${anu.result.terbit}\n• *dhuha:* ${anu.result.dhuha}\n• *dzuhur:* ${anu.result.dzuhur}\n• *ashar:* ${anu.result.ashar}\n• *maghrib:* ${anu.result.maghrib}\n• *isya:* ${anu.result.isya}`
 					frhan.sendMessage(from, hasil, text, {quoted: mek})
@@ -3828,7 +3828,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 					if (args.length < 1)return reply('Nama Channelnya??')
 					reply(mess.wait)
 					jadwaltv = `${body.slice(10)}`
-					anu = await fetchFxc7(`http://nzcha-apii.herokuapp.com/jadwaltv?channel=${jadwaltv}`, {method: 'get'})
+					anu = await fetchJson(`http://nzcha-apii.herokuapp.com/jadwaltv?channel=${jadwaltv}`, {method: 'get'})
 					jtv = '===========================\n'
 					for (let jdwl of anu.result){
 					jtv += `• *Jam:* ${jdwl.jam} => *Tayangan:* ${jdwl.tayang}\n===========================\n`
@@ -3846,7 +3846,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				
 				frhan.updatePresence(from, Presence.composing) 
 				if (isLimit(sender)) return reply(limitend(pushname2))
-				anu = await fetchFxc7(`http://lolhuman.herokuapp.com/api/jadwaltv/now?apikey=${LolApi}`, {method: 'get'})
+				anu = await fetchJson(`http://lolhuman.herokuapp.com/api/jadwaltv/now?apikey=${LolApi}`, {method: 'get'})
 				reply(mess.wait)
 				if (anu.result) return reply(anu.result)
 				frhan.sendMessage(from, anu.result, text, {quoted: mek})
@@ -3862,7 +3862,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (!isUser) return reply(mess.only.userB)
 				if (!isPrem) return reply(mess.only.premium)
 				frhan.updatePresence(from, Presence.recording)
-                anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/joox?q=${body.slice(6)}&apikey=${TobzApi}`, {method: 'get'})
+                anu = await fetchJson(`https://tobz-api.herokuapp.com/api/joox?q=${body.slice(6)}&apikey=${TobzApi}`, {method: 'get'})
                if (anu.error) return reply(anu.error)
                  infomp3 = `╭─「 *JOOX DOWNLOADER* 」\n│\n│ *• Judul* : ${anu.result.judul}\n│ *• Album* : ${anu.result.album}\n│ *• Dipublikasi* : ${anu.result.dipublikasi}\n│\n│ *TUNGGU SEBENTAR LAGI DIKIRIM*\n│ *MOHON JANGAN SPAM*\n╰─────────────────────`
                 bufferddd = await getBuffer(anu.result.thumb)
@@ -3884,7 +3884,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				frhan.updatePresence(from, Presence.recording)
 				if (args.length < 1) return reply('Urlnya mana gan?')
 					if (!isUrl(args[0]) && !args[0].includes('sck')) return reply(mess.error.Iv)
-                anu = await fetchFxc7(`https://api-anoncybfakeplayer.herokuapp.com/sckdown?url=${args[0]}`, {method: 'get'})
+                anu = await fetchJson(`https://api-anoncybfakeplayer.herokuapp.com/sckdown?url=${args[0]}`, {method: 'get'})
                if (anu.error) return reply(anu.error)
                  sck = `「 *SNACK VIDEO DOWNLOADER* 」\n\n*• Format:* ${anu.format}\n*• Size:* ${anu.size}\n\n*TUNGGU SEBENTAR LAGI DIKIRIM MOHON JANGAN SPAM*`
                 bufferddd = await getBuffer('https://raw.githubusercontent.com/FarhanXCode7/termux-bot-wa/main/src/glitchtext.png')
@@ -3906,7 +3906,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
     				frhan.updatePresence(from, Presence.recording)
 					if (args.length < 1) return reply('Urlnya mana gan?')
 					if (!isUrl(args[0]) && !args[0].includes('youtu.be')) return reply(mess.error.Iv)
-					anu = await fetchFxc7(`https://mhankbarbar.tech/api/ytv?url=${args[0]}&apiKey=${BarBarApi}`, {method: 'get'})
+					anu = await fetchJson(`https://mhankbarbar.tech/api/ytv?url=${args[0]}&apiKey=${BarBarApi}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					ytt = `╭─「 *YOUTUBE MP4 DOWNLOADER* 」\n│\n│• *Title:* ${anu.title}\n│• *Size:* ${anu.filesize}\n│\n│ Tunggu Sebentar 1 menit Mungkin Agak Lama \n│ Karna Mendownload Video\n╰─────────────────────`
 					buff = await getBuffer(anu.thumb)
@@ -3927,7 +3927,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				frhan.updatePresence(from, Presence.recording) 
 				reply(mess.wait)
 				playmp3 = body.slice(9)
-				anu = await fetchFxc7(`https://api.vhtear.com/ytmp3?query=${playmp3}&apikey=${VthearApi}`, {method: 'get'})
+				anu = await fetchJson(`https://api.vhtear.com/ytmp3?query=${playmp3}&apikey=${VthearApi}`, {method: 'get'})
 				infomp3 = `╭─「 *TIMELINE PLAY MP3* 」\n│ *• Judul:* ${anu.result.title}\n│ *• Durasi:* ${anu.result.duration}\n│ *•Size:* ${anu.result.duration}\n│\n│ *TUNGGU SEBENTAR LAGI DIKIRIM*\n│ *MOHON JANGAN SPAM YA BEB*\n╰─────────────────────`
 				buffer = await getBuffer(anu.result.image)
 				lagu = await getBuffer(anu.result.mp3)
@@ -3946,7 +3946,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				frhan.updatePresence(from, Presence.recording) 
 				reply(mess.wait)
 				playmp3 = body.slice(9)
-				anu = await fetchFxc7(`https://naufalhoster.xyz/dl/youtube?apikey=Cv5SHS-9ZxAto-HnWqLR&url=${args[0]}`, {method: 'get'})
+				anu = await fetchJson(`https://naufalhoster.xyz/dl/youtube?apikey=Cv5SHS-9ZxAto-HnWqLR&url=${args[0]}`, {method: 'get'})
 				mp3 = `${anu.result}`
 				infomp3 = `╭─「 *TIMELINE PLAY MP3* 」\n│ *• Judul:* ${mp3.title}\n│ *•Channel:* ${mp3.uploader}\n│ *• Durasi:* ${mp3.duration}\n│ *•Size:* ${mp3.audio.size}\n│ *• Like:* ${mp3.likeCount}\n│ *• Dislike:* ${mp3.dislikeCount}\n│ *• Rating:* ${mp3.rating}\n│ *• Viewers:* ${mp3.viewCount}\n│ *TUNGGU SEBENTAR LAGI DIKIRIM*\n│ *MOHON JANGAN SPAM YA BEB*\n╰─────────────────────`
 				buffer = await getBuffer(mp3.thumbnail)
@@ -3967,7 +3967,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (args.length < 1) return reply('Urlnya mana gan?')
 				if (!isUrl(args[0]) && !args[0].includes('c-ash.smule')) return reply(mess.error.Iv)
 				reply(mess.wait)
-				anu = await fetchFxc7(`https://mnazria.herokuapp.com/api/smule?link=${args[0]}`, {method: 'get'})
+				anu = await fetchJson(`https://mnazria.herokuapp.com/api/smule?link=${args[0]}`, {method: 'get'})
 				if (anu.error) return reply(anu.error)
 				teks = `*Title* : ${anu.title}\n\n Tunggu Sebentar 1 menit Mungkun Agak Lama Karna Mendownload Video`
 				thumb = await getBuffer(anu.thumb)
@@ -4009,7 +4009,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (args.length < 1) return reply('teks nya mana om?')
 				reply(mess.wait)
 				wiki = `${body.slice(6)}`
-				anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/wiki?q=${wiki}&apikey=${TobzApi}`, {method: 'get'})
+				anu = await fetchJson(`https://tobz-api.herokuapp.com/api/wiki?q=${wiki}&apikey=${TobzApi}`, {method: 'get'})
 				if (anu.error) return reply(anu.error)
 				wikii = `${anu.result}`
 				frhan.sendMessage(from, wikii, text, {quoted: mek})
@@ -4027,7 +4027,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				reply(mess.wait)
 				paste = `${body.slice(10)}`
-                   anu = await fetchFxc7(`https://api-anoncybfakeplayer.herokuapp.com/pastebin?text=${paste}`, {method: 'get'})
+                   anu = await fetchJson(`https://api-anoncybfakeplayer.herokuapp.com/pastebin?text=${paste}`, {method: 'get'})
                    frhan.sendMessage(from, `${anu.result}`, text, {quoted: mek})
                    } catch {
 					reply(mess.error.bug)
@@ -4041,7 +4041,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			if (!isUser) return reply(mess.only.userB)
 			
 			bp = `${body.slice(8)}`
-			anu = await fetchFxc7(`https://api.terhambar.com/bpk?kata=${bp}`, {method: 'get'})
+			anu = await fetchJson(`https://api.terhambar.com/bpk?kata=${bp}`, {method: 'get'})
 			reply (anu.text)
 			} catch {
 					reply(mess.error.bug)
@@ -4055,7 +4055,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			if (!isUser) return reply(mess.only.userB)
 			
 			call = `${body.slice(11)}`
-			anu = await fetchFxc7(`https://videfikri.com/api/call/?nohp=${call}`, {method: 'get'})
+			anu = await fetchJson(`https://videfikri.com/api/call/?nohp=${call}`, {method: 'get'})
 			frhan.sendMessage(from, `${anu.result.logs}`, text, {quoted: mek})
 			} catch {
 					reply(mess.error.bug)
@@ -4069,7 +4069,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			
 			if (isLimit(sender)) return reply(limitend(pushname2))
 			spam = `${body.slice(10)}`
-			anu = await fetchFxc7(`https://videfikri.com/api/spamemail/?email=${spam}&subjek=PT.PLN&pesan=Silahkan%20bayar%20tagihan%20listrik%20Anda`, {method: 'get'})
+			anu = await fetchJson(`https://videfikri.com/api/spamemail/?email=${spam}&subjek=PT.PLN&pesan=Silahkan%20bayar%20tagihan%20listrik%20Anda`, {method: 'get'})
 			frhan.sendMessage(from, `${anu.result.log_lengkap}`, text, {quoted: mek})
 			} catch {
 					reply(mess.error.bug)
@@ -4083,7 +4083,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			if (isLimit(sender)) return reply(limitend(pushname2))
 			reply(mess.wait)
 			surah = `${body.slice(12)}`
-			anu = await fetchFxc7(`https://api.zeks.xyz/api/quran?no=${surah}&apikey=${ZeksApi}`, {method: 'get'})
+			anu = await fetchJson(`https://api.zeks.xyz/api/quran?no=${surah}&apikey=${ZeksApi}`, {method: 'get'})
 			quran = `Surah Al-Qur\`an Nomer: *${surah}*\nSurah: *${anu.surah}*\nDiturunkan Dikota: *${anu.type}*\nJumlah Ayat: *${anu.jumlah_ayat}*\n\n*${anu.ket}\n=============================\n`
 			for (let surah of anu.ayat) {
 			quran += `${surah.number}\n${surah.text}\n${surah.translation_id}\n=====================\n`
@@ -4101,7 +4101,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			
 			if (isLimit(sender)) return reply(limitend(pushname2))
 			link = `${body.slice(7)}`
-			anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/bitly?url=${link}&apikey=${TobzApi}`, {method: 'get'})
+			anu = await fetchJson(`https://tobz-api.herokuapp.com/api/bitly?url=${link}&apikey=${TobzApi}`, {method: 'get'})
 			bitly = `${anu.result}`
 			frhan.sendMessage(from, bitly, text, {quoted: mek})
 			} catch {
@@ -4117,7 +4117,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			if (isLimit(sender)) return reply(limitend(pushname2))
 			reply(mess.wait)
 			style = `${body.slice(11)}`
-			anu = await fetchFxc7(`https://api.arugaz.my.id/api/random/text/fancytext?text=${style}`, {method: 'get'})
+			anu = await fetchJson(`https://api.arugaz.my.id/api/random/text/fancytext?text=${style}`, {method: 'get'})
 			reply (anu.result)
 			} catch {
 					reply(mess.error.bug)
@@ -4129,7 +4129,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			if (isLimit(sender)) return reply(limitend(pushname2))
 			if (isBanned) return reply(mess.only.benned)
 			if (!isUser) return reply(mess.only.userB)
-			anu = await fetchFxc7(`https://api.zeks.xyz/api/pantun?apikey=${ZeksApi}`, {method: 'get'})
+			anu = await fetchJson(`https://api.zeks.xyz/api/pantun?apikey=${ZeksApi}`, {method: 'get'})
 			frhan.sendMessage(from, `${anu.result.pantun}`, text, {quoted: mek})
 			} catch {
 					reply(mess.error.bug)
@@ -4144,7 +4144,7 @@ return new Promise(resolve => setTimeout(resolve, ms));
 			if (!isUser) return reply(mess.only.userB)
 			reply(mess.wait)
 		 jamdunia = `${body.slice(10)}`
-			anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/jamdunia?lokasi=${jamdunia}&apikey=${TobzApi}`, {method: 'get'})
+			anu = await fetchJson(`https://tobz-api.herokuapp.com/api/jamdunia?lokasi=${jamdunia}&apikey=${TobzApi}`, {method: 'get'})
 			wtime = `*${anu.result.title}*\n*${anu.result.date}*\n*${anu.result.time}*`
 			frhan.sendMessage(from, wtime, text, {quoted: mek})
 			} catch {
@@ -4207,7 +4207,7 @@ case 'whois':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				whois = body.slice(7)
-				anu = await fetchFxc7(`https://api.banghasan.com/domain/whois/${whois}`, {method: 'get'})
+				anu = await fetchJson(`https://api.banghasan.com/domain/whois/${whois}`, {method: 'get'})
 				reply(anu.hasil)
 				} catch {
 					reply(mess.error.bug)
@@ -4221,7 +4221,7 @@ case 'hostsearch':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				hostsearch = body.slice(12)
-				anu = await fetchFxc7(`https://api.banghasan.com/domain/hostsearch/${hostsearch}`, {method: 'get'})
+				anu = await fetchJson(`https://api.banghasan.com/domain/hostsearch/${hostsearch}`, {method: 'get'})
 				reply(anu.hasil)
 				} catch {
 					reply(mess.error.bug)
@@ -4235,7 +4235,7 @@ case 'dnslookup':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				dnslookup = body.slice(7)
-				anu = await fetchFxc7(`https://api.banghasan.com/domain/dnslookup/${dnslookup}`, {method: 'get'})
+				anu = await fetchJson(`https://api.banghasan.com/domain/dnslookup/${dnslookup}`, {method: 'get'})
 				reply(anu.hasil)
 				} catch {
 					reply(mess.error.bug)
@@ -4249,7 +4249,7 @@ case 'geoip':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				geoip = body.slice(7)
-				anu = await fetchFxc7(`https://api.banghasan.com/domain/geoip/${geoip}`, {method: 'get'})
+				anu = await fetchJson(`https://api.banghasan.com/domain/geoip/${geoip}`, {method: 'get'})
 				reply(anu.hasil)
 				} catch {
 					reply(mess.error.bug)
@@ -4263,7 +4263,7 @@ case 'nping':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				nping = body.slice(7)
-				anu = await fetchFxc7(`https://api.banghasan.com/domain/nping/${nping}`, {method: 'get'})
+				anu = await fetchJson(`https://api.banghasan.com/domain/nping/${nping}`, {method: 'get'})
 				reply(anu.hasil)
 				} catch {
 					reply(mess.error.bug)
@@ -4278,7 +4278,7 @@ case 'nping':
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				reply(mess.wait)
 				dork = `${body.slice(9)}`
-					anu = await fetchFxc7(`https://api-anoncybfakeplayer.herokuapp.com/dorking?dork=${dork}`, {method: 'get'})
+					anu = await fetchJson(`https://api-anoncybfakeplayer.herokuapp.com/dorking?dork=${dork}`, {method: 'get'})
 					hasil = `${anu.result}`
 					frhan.sendMessage(from, hasil, text, {quoted: mek})
 					} catch {
@@ -4293,7 +4293,7 @@ case 'nping':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				encode64 = `${body.slice(10)}`
-				anu = await fetchFxc7(`https://api.vhtear.com/encode_string?string=${encode64}&apikey=${VthearApi}`, {method: 'get'})
+				anu = await fetchJson(`https://api.vhtear.com/encode_string?string=${encode64}&apikey=${VthearApi}`, {method: 'get'})
 				frhan.sendMessage(from, anu.result.encode_string, text, {quoted: mek})
 				} catch {
 					reply(mess.error.bug)
@@ -4307,7 +4307,7 @@ case 'nping':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				decode64 = `${body.slice(10)}`
-				anu = await fetchFxc7(`https://api.vhtear.com/decode_string?string=${decode64}&apikey=${VthearApi}`, {method: 'get'})
+				anu = await fetchJson(`https://api.vhtear.com/decode_string?string=${decode64}&apikey=${VthearApi}`, {method: 'get'})
 				frhan.sendMessage(from, anu.result.decode_string, text, {quoted: mek})
 				} catch {
 					reply(mess.error.bug)
@@ -4321,7 +4321,7 @@ case 'nping':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				hexaencode = `${body.slice(12)}`
-				anu = await fetchFxc7(`https://api.vhtear.com/hex_to_text?string=${hexaencode}&apikey=${VthearApi}`, {method: 'get'})
+				anu = await fetchJson(`https://api.vhtear.com/hex_to_text?string=${hexaencode}&apikey=${VthearApi}`, {method: 'get'})
 				frhan.sendMessage(from, anu.result.hex_code, text, {quoted: mek})
 				} catch {
 					reply(mess.error.bug)
@@ -4335,7 +4335,7 @@ case 'nping':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				hexadecode = `${body.slice(12)}`
-				anu = await fetchFxc7(`https://api.vhtear.com/hex_to_text?string=${hexadecode}&apikey=${VthearApi}`, {method: 'get'})
+				anu = await fetchJson(`https://api.vhtear.com/hex_to_text?string=${hexadecode}&apikey=${VthearApi}`, {method: 'get'})
 				frhan.sendMessage(from, anu.result.result_text, text, {quoted: mek})
 				} catch {
 					reply(mess.error.bug)
@@ -4349,7 +4349,7 @@ case 'nping':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				encbinary = `${body.slice(11)}`
-					anu = await fetchFxc7(`https://api.anoncybfakeplayer.com/api/binary/?encode=${encbinary}`, {method: 'get'})
+					anu = await fetchJson(`https://api.anoncybfakeplayer.com/api/binary/?encode=${encbinary}`, {method: 'get'})
 					frhan.sendMessage(from, `${anu.result}`, text, {quoted: mek})
 					} catch {
 					reply(mess.error.bug)
@@ -4363,7 +4363,7 @@ case 'nping':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				decbin = `${body.slice(11)}`
-					anu = await fetchFxc7(`https://api.anoncybfakeplayer.com/api/binary/?decode=${decbin}`, {method: 'get'})
+					anu = await fetchJson(`https://api.anoncybfakeplayer.com/api/binary/?decode=${decbin}`, {method: 'get'})
 					frhan.sendMessage(from, `${anu.result}`, text, {quoted: mek})
 					} catch {
 					reply(mess.error.bug)
@@ -4377,7 +4377,7 @@ case 'nping':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				encoc = `${body.slice(10)}`
-					anu = await fetchFxc7(`https://api.anoncybfakeplayer.com/api/octal/?encode=${encoc}`, {method: 'get'})
+					anu = await fetchJson(`https://api.anoncybfakeplayer.com/api/octal/?encode=${encoc}`, {method: 'get'})
 					frhan.sendMessage(from, `${anu.result}`, text, {quoted: mek})
 					} catch {
 					reply(mess.error.bug)
@@ -4391,7 +4391,7 @@ case 'nping':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				decoc = `${body.slice(10)}`
-					anu = await fetchFxc7(`https://api.anoncybfakeplayer.com/api/octal/?decode=${decoc}`, {method: 'get'})
+					anu = await fetchJson(`https://api.anoncybfakeplayer.com/api/octal/?decode=${decoc}`, {method: 'get'})
 					frhan.sendMessage(from, `${anu.result}`, text, {quoted: mek})
 					} catch {
 					reply(mess.error.bug)
@@ -4406,7 +4406,7 @@ case 'nping':
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
 					  hash = `${body.slice(16)}`
-					  anu = await fetchFxc7(`https://freerestapi.herokuapp.com/api/v1/hash-identifier?hash=${hash}`)
+					  anu = await fetchJson(`https://freerestapi.herokuapp.com/api/v1/hash-identifier?hash=${hash}`)
 					  hasilhash = `Tipe: *${anu.hash_type}*\nChar Tipe: *${anu.char_type}*`
 					  frhan.sendMessage(from, hasilhash, text, {quoted: mek})
 					  } catch {
@@ -4442,7 +4442,7 @@ case 'nping':
 					if (isBanned) return reply(mess.only.benned)    
 					if (!isUser) return reply(mess.only.userB)
 					if (isLimit(sender)) return reply(limitend(pushname2))
-					anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/moddroid?q=${body.slice(10)}&apikey=${TobzApi}`, {method: 'get'})
+					anu = await fetchJson(`https://tobz-api.herokuapp.com/api/moddroid?q=${body.slice(10)}&apikey=${TobzApi}`, {method: 'get'})
 					teks = `╭─「 *MOD DROID SCRAPPER* 」\n│• *Nama*: ${anu.result.title}\n│• *Publisher*: ${anu.result.publisher}\n│• *Mod info:* ${anu.result.mod_info}\n│• *Size*: ${anu.result.size}\n│• *Latest version*: ${anu.result.latest_version}\n│• *Genre*: ${anu.result.genre}\n│• *Link:* ${anu.result.link}\n│• *Download*: ${anu.result.download}\n╰─────────────────────`
 					buffer = await getBuffer(anu.result.image)
 					frhan.sendMessage(from, buffer, image, {quoted: mek, caption: `${teks}`})
@@ -4456,7 +4456,7 @@ case 'nping':
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
 				if (isLimit(sender)) return reply(limitend(pushname2))
-			anu = await fetchFxc7(`https://tobz-api.herokuapp.com/api/happymod?q=${body.slice(10)}&apikey=${TobzApi}`, {method: 'get'})
+			anu = await fetchJson(`https://tobz-api.herokuapp.com/api/happymod?q=${body.slice(10)}&apikey=${TobzApi}`, {method: 'get'})
 			teks = `╭─「 *HAPPY MOD SCRAPPER* 」\n│• *Nama*: ${anu.result.title}\n│• *Version*: ${anu.result.version}\n│• *Size:* ${anu.result.size}\n│• *root*: ${anu.result.root}\n│• *Purchase*: ${anu.result.price}\n│• *Link*: ${anu.result.link}\n│• *Download*: ${anu.result.download}\n╰─────────────────────`
 			buffer = await getBuffer(anu.result.image)
 			frhan.sendMessage(from, buffer, image, {quoted: mek, caption: `${teks}`})
@@ -4471,7 +4471,7 @@ case 'nping':
 				if (!isUser) return reply(mess.only.userB)
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
-			anu = await fetchFxc7(`https://api.vhtear.com/tiktokhastag?query=${body.slice(14)}&apikey=${VthearApi}`, {method: 'get'})
+			anu = await fetchJson(`https://api.vhtear.com/tiktokhastag?query=${body.slice(14)}&apikey=${VthearApi}`, {method: 'get'})
 			tts = '====================================\n'
 			for (let tk of anu.result){
 			tts += `• *Title:* ${tk.title}\n• *Nama:* ${tk.name}\n• *Username:* ${tk.nickName}\n• *Link:* ${tk.urlVideo}\n====================================\n`
@@ -4490,7 +4490,7 @@ case 'nping':
 			if (args.length < 1)return reply('Nama Channelnya??')
 			reply(mess.wait)
 			wttpd = `${body.slice(9)}`
-			anu = await fetchFxc7(`http://nzcha-apii.herokuapp.com/wattpad-search?q=${wttpd}`, {method: 'get'})
+			anu = await fetchJson(`http://nzcha-apii.herokuapp.com/wattpad-search?q=${wttpd}`, {method: 'get'})
 			wattp = '===========================\n'
 			for (let wpadd of anu.result){
 			wattp += `• *Title:* ${wpadd.title}\n• *Link Url:* ${wpadd.url}\n===========================\n`
@@ -4511,7 +4511,7 @@ case 'nping':
 			ja = tggl.split("/")[0];
 			di = tggl.split("/")[1];
 			an = tggl.split("/")[2];
-			anu = await fetchFxc7(`https://videfikri.com/api/primbon/tgljadian/?tgl=${ja}&bln=${di}&thn=${an}`, {method: 'get'})
+			anu = await fetchJson(`https://videfikri.com/api/primbon/tgljadian/?tgl=${ja}&bln=${di}&thn=${an}`, {method: 'get'})
 			frhan.sendMessage(from, anu.result.hasil, text, {quoted: mek})
 			} catch {
 					reply(mess.error.bug)
@@ -4524,7 +4524,7 @@ case 'nping':
 				if (!isUser) return reply(mess.only.userB)
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				if (args.length < 1) return reply('_Example: !zodiak taurus')
-				anu = await fetchFxc7(`https://api.vhtear.com/zodiak?query=${body.slice(8)}&apikey=${VthearApi}`, {method: 'get'})
+				anu = await fetchJson(`https://api.vhtear.com/zodiak?query=${body.slice(8)}&apikey=${VthearApi}`, {method: 'get'})
 				hzodiak = `• *Zodiak:* ${anu.result.zodiak}\n• *Nomer Keberuntungan:* ${anu.result.nomorKeberuntungan}\n• ${anu.result.ramalan}`
 				reply(mess.wait)
 				buff = await getBuffer(`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS-48FfFR7hqlRBp4rZhVISyO9YRUvhTMnGw&usqp=CAU`)
@@ -4540,7 +4540,7 @@ case 'nping':
 				if (!isUser) return reply(mess.only.userB)
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
-				anu = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random/exo?apikey=${LolApi}`, {method: 'get'})
+				anu = await fetchJson(`http://lolhuman.herokuapp.com/api/random/exo?apikey=${LolApi}`, {method: 'get'})
 				buff = await getBuffer(anu.result)
 				frhan.sendMessage(from, buff, image, {quoted: mek, caption: 'EXO.....'})
 				} catch {
@@ -4554,7 +4554,7 @@ case 'nping':
 				if (!isUser) return reply(mess.only.userB)
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
-				anu = await fetchFxc7(`https://api.shizukaa.xyz/blackpink?apikey=itsmeiky633`, {method: 'get'})
+				anu = await fetchJson(`https://api.shizukaa.xyz/blackpink?apikey=itsmeiky633`, {method: 'get'})
 				buff = await getBuffer(anu.result)
 				frhan.sendMessage(from, buff, image, {quoted: mek, caption: 'BLACK PINK.....'})
 				} catch {
@@ -4568,7 +4568,7 @@ case 'nping':
 				if (!isUser) return reply(mess.only.userB)
 				
 				if (isLimit(sender)) return reply(limitend(pushname2))
-				anu = await fetchFxc7(`http://lolhuman.herokuapp.com/api/random/bts?apikey=${LolApi}`, {method: 'get'})
+				anu = await fetchJson(`http://lolhuman.herokuapp.com/api/random/bts?apikey=${LolApi}`, {method: 'get'})
 				buff = await getBuffer(anu.result)
 				frhan.sendMessage(from, buff, image, {quoted: mek, caption: 'BTS.....'})
 				} catch {
